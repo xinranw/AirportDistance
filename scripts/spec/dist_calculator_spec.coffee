@@ -1,4 +1,4 @@
-describe 'Player', ->
+describe 'DistCalculator', ->
   calc = null
 
   beforeEach ->

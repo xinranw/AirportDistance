@@ -19,9 +19,9 @@ def parseAirportData original_file, dest_file
         when 4
           name = line[last+2..i-2]
         when 5        
-          latitude = line[last+1..i-1]
+          latitude = line[last+1..i-1].to_f
         when 6
-          longitude = line[last+1..i-1]
+          longitude = line[last+1..i-1].to_f
         when 15
           code = line[last+2..i-2]
         end
