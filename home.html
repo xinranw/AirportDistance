@@ -1,14 +1,23 @@
 <!-- Create a web app that calculates the distance (in nautical miles) between two airports. The app should autocomplete the airports and should feature all airports in the US. Bonus: plot the trip on Google maps -->
 
-<html>
+<html lang="en">
 <head>
   <title></title>
+  <link rel="stylesheet" href="styles/styles3.css" type="text/css" media="screen"/>
 </head>
 <body>
   <form>
-    <input name="from" type="text"/>
-    <input name="to" type="text"/>
+    <label for="origin">Origin:</label>
+    <input name="from" type="text" id="origin"/>
+    <label for="destination">Destination:</label>
+    <input name="to" type="text" id="destination"/>
     <input name="submit" type="submit"/>
   </form>
+  <span>Distance: 
+    <span id = "result">50</span>
+  </span>
 </body>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="scripts/dist_calculator.coffee" type="text/javascript"></script>
 </html>
