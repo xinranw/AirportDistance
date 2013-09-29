@@ -1,0 +1,7 @@
+form .ui-helper-hidden-accessible {
+  display: none; }
+
+ul.ui-autocomplete {
+  width: 500px;
+  background: white;
+  border: solid black 1px; }

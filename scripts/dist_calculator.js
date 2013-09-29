@@ -10,7 +10,7 @@ DistCalculator = (function() {
 
   DistCalculator.prototype.calculateDistance = function(coord1, coord2) {
     var RADIUS, a, c, d, lat1, lat2, long1, long2;
-    RADIUS = 6371;
+    RADIUS = 6371 * 0.539957;
     lat1 = DistCalculator.toRad(coord1[0]);
     long1 = DistCalculator.toRad(coord1[1]);
     lat2 = DistCalculator.toRad(coord2[0]);

@@ -14,6 +14,15 @@ describe('ViewController', function() {
   var result, viewController;
   viewController = new ViewController();
   result = null;
+  it('should setTripCoords()', function() {
+    var trip;
+    trip = new TripModel();
+    viewController.setTripCoords([0, 1], [2, 3], trip);
+    expect(trip.getOriginCoords()[0]).toBe(0);
+    expect(trip.getOriginCoords()[1]).toBe(1);
+    expect(trip.getDestinationCoords()[0]).toBe(2);
+    return expect(trip.getDestinationCoords()[1]).toBe(3);
+  });
   describe('when initialized without data', function() {
     return it('getData() returns an empty object', function() {
       result = viewController.getData();
@@ -28,11 +37,17 @@ describe('ViewController', function() {
     it('getData() returns a nonempty object', function() {
       return expect($.isEmptyObject(result)).toBe(false);
     });
-    return it('should store the correct file data into a json object', function() {
+    it('should store the correct file data into a json object', function() {
       expect(data["test"]["name"]).toBe("Test Airport");
       expect(data["test"]["code"]).toBe("test");
       expect(data["test"]["latitude"]).toBe(35);
       return expect(data["test"]["longitude"]).toBe(-106);
+    });
+    return it('should getCoords()', function() {
+      var coords;
+      coords = viewController.getCoords("test");
+      expect(coords[0]).toBe(35);
+      return expect(coords[1]).toBe(-106);
     });
   });
 });

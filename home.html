@@ -3,14 +3,14 @@
 <html lang="en">
 <head>
   <title></title>
-  <!-- <link rel="stylesheet" href="styles/styles3.css" type="text/css" media="screen"/> -->
+  <link rel="stylesheet" href="css/styles.css" type="text/css" media="screen"/>
 </head>
 <body>
   <form>
     <label for="origin">Origin:</label>
-    <input name="from" type="text" id="origin"/>
+    <input name="from" type="text" id="origin" class="location_input"/>
     <label for="destination">Destination:</label>
-    <input name="to" type="text" id="destination"/>
+    <input name="to" type="text" id="destination" class="location_input"/>
     <input name="submit" type="button" id="button" value="Submit"/>
   </form>
   <span>Distance: 
@@ -18,18 +18,33 @@
   </span>
 </body>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-<script src="scripts/dist_calculator.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="scripts/trip_model.js" type="text/javascript"></script>
 <script src="scripts/view_controller.js" type="text/javascript"></script>
 <script>
 $(document).ready(function(){
+  var viewController = new ViewController();
+  var keys = [];
+  
+  var trip = new TripModel();
   $('#button').click(function(){
-    var calc = new DistCalculator();
-    var coord1 = [35, -106];
-    var coord2 = [38, -76];
-    var dist = calc.calculateDistance(coord1, coord2);
-    ViewController.updateDistance($('#result'), dist);
+    origin = viewController.getInputValue('#origin')
+    destination = viewController.getInputValue('#destination')
+    originCoords = viewController.getCoords(origin)
+    destinationCoords = viewController.getCoords(destination)
+    viewController.setTripCoords(originCoords, destinationCoords, trip)
+    ViewController.updateDistance($('#result'), trip.calculateDistance());
   })
+  
+  viewController.loadData('airports.json', function(){
+    keys = viewController.getKeys();
+    $( ".location_input" ).autocomplete({
+      source: keys
+    });
+  })
+
+
 })
 
 

@@ -2,26 +2,52 @@
 var ViewController;
 
 ViewController = (function() {
-  var data;
+  var data, keys;
+
+  function ViewController() {}
 
   data = {};
 
-  function ViewController(file_location) {
+  keys = [];
+
+  ViewController.prototype.loadData = function(file_location, fun) {
     var _this = this;
-    $.getJSON(file_location, function(data) {
-      return _this.data = data;
+    if (file_location == null) {
+      console.log('no file location specified');
+      return;
+    }
+    return $.getJSON(file_location, function(data) {
+      console.log('success');
+      _this.data = data;
+      _this.keys = Object.keys(data);
+      if (fun == null) {
+        console.log('no callback function specified');
+        return;
+      }
+      return fun();
+    }).error(function() {
+      return console.log('error');
     });
-  }
+  };
 
   ViewController.updateDistance = function(dom_elem, value) {
-    return dom_elem.text(value + " km");
+    return dom_elem.text(value + " nmi");
+  };
+
+  ViewController.prototype.getInputValue = function(dom_elem) {
+    return $(dom_elem).val();
+  };
+
+  ViewController.prototype.setTripCoords = function(origin, destination, trip_model) {
+    trip_model.setOriginCoords(origin);
+    return trip_model.setDestinationCoords(destination);
   };
 
   ViewController.prototype.getCoords = function(code) {
     var coords;
     coords = [];
-    coords[0] = data[code]["lat"];
-    coords[1] = data[code]["long"];
+    coords[0] = this.data[code]["latitude"];
+    coords[1] = this.data[code]["longitude"];
     return coords;
   };
 
@@ -30,7 +56,11 @@ ViewController = (function() {
   };
 
   ViewController.prototype.setData = function(json) {
-    return this.data = json;
+    return this.data = $.extend(true, {}, json);
+  };
+
+  ViewController.prototype.getKeys = function() {
+    return this.keys;
   };
 
   return ViewController;

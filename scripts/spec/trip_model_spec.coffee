@@ -1,17 +1,29 @@
-describe 'DistCalculator', ->
-  calc = null
+describe 'TripModel', ->
+  trip = null
 
   beforeEach ->
-    calc = new DistCalculator()
+    trip = new TripModel()
 
   it 'can convert degrees to radians', ->
-    result = DistCalculator.toRad(90).toFixed(2)
+    result = TripModel.toRad(90).toFixed(2)
     expect(result).toBe '1.57'
 
-  it 'should calculate the distance between two Geographic Coordinates', ->
-    result = calc.calculateDistance([35, -106], [38, -76])
-    expect(result).toBe 2690
+  it 'should set and get origin coords', ->
+    trip.setOriginCoords([1, 2])
+    expect(trip.getOriginCoords()[0]).toBe 1
+    expect(trip.getOriginCoords()[1]).toBe 2
 
+  it 'should set and get destination', ->
+    trip.setDestinationCoords([1,2])
+    expect(trip.getDestinationCoords()[0]).toBe 1
+    expect(trip.getDestinationCoords()[1]).toBe 2
+
+  it 'should calculate the distance between two Geographic Coordinates', ->
+    # result = trip.calculateDistance([35, -106], [38, -76])
+    trip.setOriginCoords([35, -106])
+    trip.setDestinationCoords([38, -76])
+    result = trip.calculateDistance()
+    expect(result).toBe 1453
 
   # it("should be able to play a Song", function() {
   #   player.play(song);

@@ -1,10 +1,11 @@
 class DistCalculator
+  
 
   @toRad : (degrees)->
     degrees * Math.PI / 180;
 
   calculateDistance : (coord1, coord2)->
-    RADIUS = 6371
+    RADIUS = 6371 * 0.539957
     lat1 = DistCalculator.toRad(coord1[0])
     long1 = DistCalculator.toRad(coord1[1])
     lat2 = DistCalculator.toRad(coord2[0])
