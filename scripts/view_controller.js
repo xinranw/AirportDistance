@@ -31,7 +31,7 @@ ViewController = (function() {
   };
 
   ViewController.updateDistance = function(dom_elem, value) {
-    return dom_elem.text(value + " nmi");
+    return dom_elem.text(value);
   };
 
   ViewController.prototype.getInputValue = function(dom_elem) {

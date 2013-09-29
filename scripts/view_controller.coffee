@@ -20,7 +20,7 @@ class ViewController
 
 
   @updateDistance : (dom_elem, value)->
-    dom_elem.text(value + " nmi")
+    dom_elem.text(value)
 
   getInputValue : (dom_elem)->
     return $(dom_elem).val()
