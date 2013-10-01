@@ -1,0 +1,3 @@
+coffee -bcw scripts/spec/*.coffee
+coffee -bcw scripts/*.coffee
+sass --watch css/styles.scss

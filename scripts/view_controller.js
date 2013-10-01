@@ -63,6 +63,29 @@ ViewController = (function() {
     return this.keys;
   };
 
+  ViewController.prototype.initializeMap = function(coords1, coords2, dom_elem) {
+    var directionsDisplay, directionsRequest, directionsService, map, mapOptions;
+    directionsService = new google.maps.DirectionsService();
+    directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsRequest = {
+      origin: new google.maps.LatLng(coords1[0], coords1[1]),
+      destination: new google.maps.LatLng(coords2[0], coords2[1]),
+      travelMode: google.maps.TravelMode.DRIVING
+    };
+    mapOptions = {
+      center: new google.maps.LatLng((coords1[0] + coords2[0]) / 2, (coords1[1] + coords2[1]) / 2),
+      zoom: 8,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(dom_elem[0], mapOptions);
+    directionsDisplay.setMap(map);
+    return directionsService.route(directionsRequest, function(result, status) {
+      if (status === google.maps.DirectionsStatus.OK) {
+        return directionsDisplay.setDirections(result);
+      }
+    });
+  };
+
   return ViewController;
 
 })();
