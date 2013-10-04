@@ -88,11 +88,12 @@ body {
   body ul.ui-autocomplete {
     position: absolute;
     top: 300px;
-    height: 40%;
+    height: auto;
     width: 400px;
     background: white;
     padding: 2px 0;
     overflow: auto;
+    color: black;
     border-color: #a0a0a0;
     border-style: solid;
     border-width: 1px; }

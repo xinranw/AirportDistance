@@ -52,7 +52,10 @@ $(document).ready(function(){
     
     // If origin or destination hasn't been filled, return
     // Otherwise calculate distance and display map
-    if (!origin || !destination) {return;}
+    if (!origin || !destination) {
+      $('#map_canvas').hide();
+      return;
+    }
     originCoords = viewController.getCoords(origin)
     destinationCoords = viewController.getCoords(destination)
     viewController.setTripCoords(originCoords, destinationCoords, trip)
